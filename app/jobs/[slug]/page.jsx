@@ -3,7 +3,8 @@ import { fetchStory } from "@/lib/storyblok";
 import RichText from "@/components/RichText";
 
 export default async function JobDetailPage({ params }) {
-  const story = await fetchStory(`jobs/${params.slug}`);
+  const { slug } = await params;
+  const story = await fetchStory(`jobs/${slug}`);
   if (!story) notFound();
 
   const { title, summary, department, location, content } = story.content;
