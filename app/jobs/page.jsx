@@ -1,6 +1,9 @@
 import { StoryblokServerComponent, storyblokInit, apiPlugin } from "@storyblok/react/rsc";
+import { notFound } from "next/navigation";
 import { fetchStory } from "@/lib/storyblok";
 import { storyblokComponents } from "@/lib/storyblok-components";
+
+export const dynamic = "force-dynamic";
 
 storyblokInit({
   accessToken: process.env.STORYBLOK_DELIVERY_API_TOKEN,
@@ -9,9 +12,17 @@ storyblokInit({
 });
 
 export default async function JobsPage({ searchParams }) {
-  const story = await fetchStory("jobs/index");
-  const department = searchParams?.department || "";
-  const q = searchParams?.q || "";
+  let story;
+  try {
+    story = await fetchStory("jobs/index");
+  } catch {
+    story = null;
+  }
+  if (!story) notFound();
+
+  const { department: rawDepartment, q: rawQ } = await searchParams;
+  const department = rawDepartment || "";
+  const q = rawQ || "";
 
   return (
     <StoryblokServerComponent
