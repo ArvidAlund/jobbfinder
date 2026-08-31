@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { fetchStory } from "@/lib/storyblok";
 import RichText from "@/components/RichText";
+import "@/lib/storyblok-components";
 
 export default async function JobDetailPage({ params }) {
   const { slug } = await params;
