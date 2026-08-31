@@ -5,7 +5,7 @@ export default async function JobList({ blok, department, q }) {
   const params = {
     starts_with: "jobs/",
     content_type: "job-post",
-    excluding_slugs: "jobs/index",
+    excluding_slugs: "jobs",
   };
 
   if (department) {

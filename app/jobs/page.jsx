@@ -14,7 +14,7 @@ storyblokInit({
 export default async function JobsPage({ searchParams }) {
   let story;
   try {
-    story = await fetchStory("jobs/index");
+    story = await fetchStory("jobs");
   } catch {
     story = null;
   }
